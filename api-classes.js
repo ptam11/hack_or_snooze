@@ -37,9 +37,13 @@ class StoryList {
     // this function should return the newly created story so it can be used in the script.js file where it will be appended to the DOM
     newStory.token = user.loginToken;
     
-    $.post(`${BASE_URL}/stories`, newStory,
+    const response = await $.post(`${BASE_URL}/stories`, newStory,
       () => console.log("adding story")
     );
+    this.stories.push(new Story(response.story));
+    console.log(this.stories);
+    return this.stories;
+    
 
   }
 }

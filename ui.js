@@ -201,7 +201,7 @@ $(async function() {
 
 
 // add new story
-  $storyFormContainer.on('click', '#story-submit', function(e) {
+  $createStoryForm.on('submit', async function(e) {
     e.preventDefault();
     let title = $storyTitle.val();
     let author = $storyAuthor.val();
@@ -213,8 +213,8 @@ $(async function() {
         url
       }
     }
-    storyList.addStory(currentUser, storyObj);
-    generateStories();
+    await storyList.addStory(currentUser, storyObj);
+    await generateStories();
   })
 
   // simple function to pull the hostname from a URL
