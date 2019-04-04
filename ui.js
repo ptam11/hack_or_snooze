@@ -164,11 +164,13 @@ $(async function() {
     //add favorite
     if($(this).hasClass("fas")) {
       await currentUser.favoriteStory(storyId, currentUser, "post");
-    } else if($(this).hasClass("far")) {
+    } 
+     //remove favorite
+    else if($(this).hasClass("far")) {
       await currentUser.favoriteStory(storyId, currentUser, "delete");
     }
     
-    //remove favorite
+   
     })
   } 
 
@@ -178,10 +180,14 @@ $(async function() {
   function generateStoryHTML(story) {
     let hostName = getHostName(story.url);
 
+    let isFavorite = currentUser.favorites.findIndex(obj => {
+      return obj.storyId === story.storyId;
+    })
+
     // render story markup
     const storyMarkup = $(`
       <li id="${story.storyId}">
-        <i class="far fa-star"></i>
+        <i class="${isFavorite > -1 ? "fas" : "far"} fa-star"></i>
         <a class="article-link" href="${story.url}" target="a_blank">
           <strong>${story.title}</strong>
         </a>

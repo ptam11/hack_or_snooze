@@ -139,12 +139,8 @@ class User {
     return existingUser;
   }
 
-  //CREATE FAVORITE FUNCTION 
-  //'post' or 'delete' request
-  // user.username storyId
-  // https://hack-or-snooze-v2.herokuapp.com/users/username/favorites/storyId
+  //addRemoveFavorites
   async favoriteStory(storyId, userObj, requestType) {
-    // this.favorites.push(storyId);
     console.log("add a favorite")
     let result = await $.ajax({
       url: `https://hack-or-snooze-v2.herokuapp.com/users/${userObj.username}/favorites/${storyId}`, 
