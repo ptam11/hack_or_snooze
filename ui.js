@@ -8,6 +8,8 @@ $(async function() {
   const $ownStories = $("#my-articles");
   const $navLogin = $("#nav-login");
   const $navLogOut = $("#nav-logout");
+  const $createStoryForm = $("#create-story-form");
+  const $createStoryNav = $("#create-story-nav");
 
   // global storyList variable
   let storyList = null;
@@ -179,8 +181,15 @@ $(async function() {
   function showNavForLoggedInUser() {
     $navLogin.hide();
     $navLogOut.show();
-    createStoryForm();
+    $createStoryNav.show();
+    
   }
+
+  // create story event listener 
+
+  $createStoryNav.on('click', function() {
+    createStoryForm();
+  })
 
   // simple function to pull the hostname from a URL
   function getHostName(url) {
@@ -198,7 +207,8 @@ $(async function() {
 
   function createStoryForm() {
     console.log('creating story form');
-    $('.story-form').show();
+    $createStoryForm.slideToggle();
+
   }
 
 
