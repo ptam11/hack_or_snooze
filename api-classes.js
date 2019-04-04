@@ -143,16 +143,15 @@ class User {
   //'post' or 'delete' request
   // user.username storyId
   // https://hack-or-snooze-v2.herokuapp.com/users/username/favorites/storyId
-  async favoriteStory(storyId, username, requestType) {
-    this.favorites.push(storyId);
+  async favoriteStory(storyId, userObj, requestType) {
+    // this.favorites.push(storyId);
     console.log("add a favorite")
     let result = await $.ajax({
-      url: `https://hack-or-snooze-v2.herokuapp.com/users/${username}/favorites/${storyId}`, 
+      url: `https://hack-or-snooze-v2.herokuapp.com/users/${userObj.username}/favorites/${storyId}`, 
       type: requestType,
-      data: {token: username.loginToken},
+      data: {token: userObj.loginToken},
     });
     console.log(result);
-    console.log(this.favorites);
   }
 
 }

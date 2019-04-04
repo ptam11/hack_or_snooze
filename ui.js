@@ -163,11 +163,10 @@ $(async function() {
     
     //add favorite
     if($(this).hasClass("fas")) {
-      await currentUser.favoriteStory(storyId, currentUser.username, "post");
-    } 
-    // else if($(this).hasClass("far")) {
-    //   await currentUser.favoriteStory(storyId, currentUser.username, "delete");
-    // }
+      await currentUser.favoriteStory(storyId, currentUser, "post");
+    } else if($(this).hasClass("far")) {
+      await currentUser.favoriteStory(storyId, currentUser, "delete");
+    }
     
     //remove favorite
     })
