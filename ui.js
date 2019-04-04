@@ -10,6 +10,14 @@ $(async function() {
   const $navLogOut = $("#nav-logout");
   const $createStoryForm = $("#create-story-form");
   const $createStoryNav = $("#create-story-nav");
+  const $storyFormContainer = $("#story-form-container");
+  const $storyTitle = $("#story-title");
+  const $storyAuthor = $("#story-author");
+  const $storyUrl = $("#story-url");
+  const $storySubmit = $("#story-submit");
+
+
+  // const $
 
   // global storyList variable
   let storyList = null;
@@ -182,13 +190,28 @@ $(async function() {
     $navLogin.hide();
     $navLogOut.show();
     $createStoryNav.show();
-    
+    console.log(currentUser);
   }
 
   // create story event listener 
 
   $createStoryNav.on('click', function() {
-    createStoryForm();
+    $createStoryForm.slideToggle();
+  })
+
+  $storyFormContainer.on('click', '#story-submit', function(e) {
+    e.preventDefault();
+    let title = $storyTitle.val();
+    let author = $storyAuthor.val();
+    let url = $storyUrl.val();
+    const storyObj = {
+      story: {
+        title,
+        author,
+        url
+      }
+    }
+    storyList.addStory(currentUser, storyObj);
   })
 
   // simple function to pull the hostname from a URL
@@ -203,12 +226,6 @@ $(async function() {
       hostName = hostName.slice(4);
     }
     return hostName;
-  }
-
-  function createStoryForm() {
-    console.log('creating story form');
-    $createStoryForm.slideToggle();
-
   }
 
 
