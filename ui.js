@@ -15,6 +15,9 @@ $(async function() {
   const $storyAuthor = $("#story-author");
   const $storyUrl = $("#story-url");
   const $storySubmit = $("#story-submit");
+  const $emptyFavorite = $(".far");
+  const $filledFavorite = $(".fas");
+
 
 
   // const $
@@ -150,7 +153,25 @@ $(async function() {
       const result = generateStoryHTML(story);
       $allStoriesList.append(result);
     }
+    addRemoveFavorites();
   }
+
+  async function addRemoveFavorites() {
+    $(".fa-star").on("click", async function() {
+    $(this).toggleClass("far fas");
+    let storyId = $(this).parent().attr("id");
+    
+    //add favorite
+    if($(this).hasClass("fas")) {
+      await currentUser.favoriteStory(storyId, currentUser.username, "post");
+    } 
+    // else if($(this).hasClass("far")) {
+    //   await currentUser.favoriteStory(storyId, currentUser.username, "delete");
+    // }
+    
+    //remove favorite
+    })
+  } 
 
   /**
    * A function to render HTML for an individual Story instance
@@ -161,6 +182,7 @@ $(async function() {
     // render story markup
     const storyMarkup = $(`
       <li id="${story.storyId}">
+        <i class="far fa-star"></i>
         <a class="article-link" href="${story.url}" target="a_blank">
           <strong>${story.title}</strong>
         </a>
@@ -172,6 +194,8 @@ $(async function() {
 
     return storyMarkup;
   }
+
+  
 
   // hide all elements in elementsArr
   function hideElements() {
@@ -230,6 +254,8 @@ $(async function() {
     }
     return hostName;
   }
+
+
 
 
   // sync current user information to localStorage
