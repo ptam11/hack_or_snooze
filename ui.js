@@ -199,6 +199,8 @@ $(async function() {
     $createStoryForm.slideToggle();
   })
 
+
+// add new story
   $storyFormContainer.on('click', '#story-submit', function(e) {
     e.preventDefault();
     let title = $storyTitle.val();
@@ -212,6 +214,7 @@ $(async function() {
       }
     }
     storyList.addStory(currentUser, storyObj);
+    generateStories();
   })
 
   // simple function to pull the hostname from a URL
