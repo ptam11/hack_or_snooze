@@ -1,4 +1,4 @@
-$(async function() {
+$(async function () {
   // cache some selectors we'll be using quite a bit
   const $allStoriesList = $("#all-articles-list");
   const $submitForm = $("#submit-form");
@@ -34,7 +34,7 @@ $(async function() {
    * Event listener for logging in.
    *  If successfully we will setup the user instance
    */
-  $loginForm.on("submit", async function(evt) {
+  $loginForm.on("submit", async function (evt) {
     evt.preventDefault(); // no page-refresh on submit
 
     // grab the username and password
@@ -53,7 +53,7 @@ $(async function() {
    * Event listener for signing up.
    *  If successfully we will setup a new user instance
    */
-  $createAccountForm.on("submit", async function(evt) {
+  $createAccountForm.on("submit", async function (evt) {
     evt.preventDefault(); // no page refresh
 
     // grab the required fields
@@ -71,7 +71,7 @@ $(async function() {
   /**
    * Log Out Functionality
    */
-  $navLogOut.on("click", function() {
+  $navLogOut.on("click", function () {
     // empty out local storage
     localStorage.clear();
     // refresh the page, clearing memory
@@ -81,7 +81,7 @@ $(async function() {
   /**
    * Event Handler for Clicking Login
    */
-  $navLogin.on("click", function() {
+  $navLogin.on("click", function () {
     // Show the Login and Create Account Forms
     $loginForm.slideToggle();
     $createAccountForm.slideToggle();
@@ -91,7 +91,7 @@ $(async function() {
   /**
    * Event handler for Navigation to Homepage
    */
-  $("body").on("click", "#nav-all", async function() {
+  $("body").on("click", "#nav-all", async function () {
     hideElements();
     await generateStories();
     $allStoriesList.show();
@@ -153,26 +153,26 @@ $(async function() {
       const result = generateStoryHTML(story);
       $allStoriesList.append(result);
     }
-    addRemoveFavorites();
+    await addRemoveFavorites();
   }
 
   async function addRemoveFavorites() {
-    $(".fa-star").on("click", async function() {
-    $(this).toggleClass("far fas");
-    let storyId = $(this).parent().attr("id");
-    
-    //add favorite
-    if($(this).hasClass("fas")) {
-      await currentUser.favoriteStory(storyId, currentUser, "post");
-    } 
-     //remove favorite
-    else if($(this).hasClass("far")) {
-      await currentUser.favoriteStory(storyId, currentUser, "delete");
-    }
-    
-   
+    $(".fa-star").on("click", async function () {
+      $(this).toggleClass("far fas");
+      let storyId = $(this).parent().attr("id");
+
+      //add favorite
+      if ($(this).hasClass("fas")) {
+        await currentUser.favoriteStory(storyId, currentUser, "post");
+      }
+      //remove favorite
+      else if ($(this).hasClass("far")) {
+        await currentUser.favoriteStory(storyId, currentUser, "delete");
+      }
+
+
     })
-  } 
+  }
 
   /**
    * A function to render HTML for an individual Story instance
@@ -200,7 +200,7 @@ $(async function() {
     return storyMarkup;
   }
 
-  
+
 
   // hide all elements in elementsArr
   function hideElements() {
@@ -224,13 +224,13 @@ $(async function() {
 
   // create story event listener 
 
-  $createStoryNav.on('click', function() {
+  $createStoryNav.on('click', function () {
     $createStoryForm.slideToggle();
   })
 
 
-// add new story
-  $createStoryForm.on('submit', async function(e) {
+  // add new story
+  $createStoryForm.on('submit', async function (e) {
     e.preventDefault();
     let title = $storyTitle.val();
     let author = $storyAuthor.val();

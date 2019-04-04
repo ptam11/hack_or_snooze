@@ -31,19 +31,19 @@ class StoryList {
      The function should accept the current instance of User who will post the story
      It should also accept an object which with a title, author, and url
      */
-  
+
   async addStory(user, newStory) {
     // TODO - Implement this functions!
     // this function should return the newly created story so it can be used in the script.js file where it will be appended to the DOM
     newStory.token = user.loginToken;
-    
+
     const response = await $.post(`${BASE_URL}/stories`, newStory,
       () => console.log("adding story")
     );
     this.stories.push(new Story(response.story));
     console.log(this.stories);
     return this.stories;
-    
+
 
   }
 }
@@ -141,13 +141,19 @@ class User {
 
   //addRemoveFavorites
   async favoriteStory(storyId, userObj, requestType) {
-    console.log("add a favorite")
     let result = await $.ajax({
-      url: `https://hack-or-snooze-v2.herokuapp.com/users/${userObj.username}/favorites/${storyId}`, 
+      url: `https://hack-or-snooze-v2.herokuapp.com/users/${userObj.username}/favorites/${storyId}`,
       type: requestType,
-      data: {token: userObj.loginToken},
+      data: { token: userObj.loginToken },
     });
-    console.log(result);
+    let listStories = await StoryList.getStories();
+    if(requestType === "post") {
+      this.favorites.push(listStories.stories[listStories.stories.findIndex(el => el.storyId === storyId)]);
+    } else if(requestType === "delete") {
+      this.favorites.splice(this.favorites.findIndex(el => el.storyId === storyId),1);
+    }   
+    return this.favorites;
+    
   }
 
 }
