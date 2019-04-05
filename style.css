@@ -220,3 +220,41 @@ form > hr {
     margin: 8px auto;
   }
 }
+
+/* * {
+  outline: 2px solid blue;
+} */
+
+nav {
+  border-radius: 15px 15px 0 0;
+  background-color: #FF3D00;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: Play;
+}
+
+.nav-title:hover, .nav-link:hover, .nav-title:link {
+  background-color: #FF9800;
+  color: black;
+  text-decoration: none;
+}
+
+
+.card {
+  display: block;
+}
+
+.card-header {
+  background-color:#009688;
+  font-family: Play;
+}
+
+.articles-container {
+  background-color: #BDBDBD;
+}
+
+.card-body {
+  font-family: Amatic;
+  font-size: .9rem;
+}

@@ -84,20 +84,27 @@ class User {
    It makes a POST request to the API and returns the newly created User as well as a token
    */
   static async create(username, password, name) {
-    const response = await $.post(`${BASE_URL}/signup`, {
-      user: {
-        username,
-        password,
-        name
-      }
-    });
-    // build a new User instance from the API response
-    const newUser = new User(response.user);
+    try {
+      const response = await $.post(`${BASE_URL}/signup`, {
+        user: {
+          username,
+          password,
+          name
+        }
+      });
 
-    // attach the token to the newUser instance for convenience
-    newUser.loginToken = response.token;
+      // build a new User instance from the API response
+      const newUser = new User(response.user);
 
-    return newUser;
+      // attach the token to the newUser instance for convenience
+      newUser.loginToken = response.token;
+
+      return newUser;
+    } catch(err) {
+      let response = JSON.parse(err.responseText)
+      console.log(response.error.title);
+      console.log(response.error.message);
+    }
   }
 
   /*

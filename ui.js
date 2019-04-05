@@ -175,7 +175,9 @@ $(async function () {
       }
     })
   }
-
+  /**
+   * 
+   */
   // TODO - delete story when fa-trash clicked, correct user required
   async function addDeleteStoryListener() {
     $(".fa-trash").on("click", async function() {
@@ -185,6 +187,7 @@ $(async function () {
     })
   }
 
+
   /**
    * A function to render HTML for an individual Story instance
    */
@@ -193,39 +196,48 @@ $(async function () {
     
     // will check favorites only if user is logged in
     let isFavorite = -1;
+
     if(currentUser !== null) {
       isFavorite = currentUser.favorites.findIndex(obj => {
         return obj.storyId === story.storyId;
       })
     }
-    
-    // will add trash can only if it exist in own story
-    let trashMarkup = "";
-    let ind = currentUser.ownStories.findIndex((obj) => {
-      return obj.storyId === story.storyId;
-    })
-    if(ind !== -1) {
-      trashMarkup = '<i class="fa fa-trash" aria-hidden="true"></i>'
-    }
 
+        // will add trash can only if it exist in own story
+        let trashMarkup = "";
+        if(currentUser !== null) {
+          let ind = currentUser.ownStories.findIndex((obj) => {
+            return obj.storyId === story.storyId;
+          })
+          if(ind !== -1) {
+            trashMarkup = '<i class="fa fa-trash ml-2" aria-hidden="true"></i>'
+          }
+      }
+
+    
     // will show favorites and trash buttons only if logged in
     let favoriteMarkup = "";
+
     if(currentUser !== null) {
-      favoriteMarkup = `<i class="${isFavorite > -1 ? "fas" : "far"} fa-star"></i>`
+      favoriteMarkup = `<i class="text-warning mr-1 ${isFavorite > -1 ? "fas" : "far"} fa-star"></i>`
     }
 
     // render story markup
     const storyMarkup = $(`
-      <li id="${story.storyId}">
+      <li id="${story.storyId}" class="card mb-3">
+        <div class="card-header">
         ${favoriteMarkup}
-        <a class="article-link" href="${story.url}" target="a_blank">
-          <strong>${story.title}</strong>
-        </a>
-        <small class="article-author">by ${story.author}</small>
-        <small class="article-hostname ${hostName} mr-5">(${hostName})</small>
-        ${trashMarkup}
-        <small class="article-username">posted by ${story.username}</small>
-        
+          <a class="article-link" href="${story.url}" target="a_blank">
+            <strong>${story.title}</strong>
+          </a>
+        </div>
+        <div class="card-body">
+      
+          <small class="article-author">by ${story.author}</small>
+          <small class="article-hostname ${hostName}">(${hostName})</small>
+          ${trashMarkup}
+          <small class="article-username">posted by ${story.username}</small>
+        </div>
       </li>
     `);
 
@@ -272,6 +284,7 @@ $(async function () {
         url
       }
     }
+    $allStoriesList.empty();
     await storyList.addStory(currentUser, storyObj);
     regenerateStories(storyList);
   })

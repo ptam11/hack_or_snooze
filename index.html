@@ -6,20 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Hack or Snooze</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC%7CPlay" rel="stylesheet">
   <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
 <body>
   <nav>
-    <b><a class="nav-link navbar-brand" href="#" id="nav-all">Hack or Snooze</a></b>
+    <b class="nav-title"><a class="nav-link navbar-brand" href="#" id="nav-all">Hack or Snooze</a></b>
     <a id="create-story-nav" href="#" class="nav-link hidden">create story</a>
     <a class="nav-link nav-right" href="#" id="nav-login">login/create user</a>
     <span class="nav-link nav-right hidden" id="nav-welcome">
       <a href="#" id="nav-user-profile"></a>
     </span>
-    <a class="hidden" id="nav-logout" href="#">
+    <a class="hidden ml-auto nav-link" id="nav-logout" href="#">
       <small>(logout)</small>
     </a>
   </nav>
@@ -59,8 +62,8 @@
       <button type="submit">submit</button>
       <hr>
     </form>
-    <article>
-      <ol id="all-articles-list" class="articles-list">
+    <article >
+      <ol id="all-articles-list" class="px-0 articles-list text-center">
         <h3>Loading...</h3>
       </ol>
     </article>
