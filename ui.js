@@ -185,7 +185,6 @@ $(async function () {
     })
   }
 
-
   /**
    * A function to render HTML for an individual Story instance
    */
@@ -194,19 +193,25 @@ $(async function () {
     
     // will check favorites only if user is logged in
     let isFavorite = -1;
-
     if(currentUser !== null) {
       isFavorite = currentUser.favorites.findIndex(obj => {
         return obj.storyId === story.storyId;
       })
     }
+    
+    // will add trash can only if it exist in own story
+    let trashMarkup = "";
+    let ind = currentUser.ownStories.findIndex((obj) => {
+      return obj.storyId === story.storyId;
+    })
+    if(ind !== -1) {
+      trashMarkup = '<i class="fa fa-trash" aria-hidden="true"></i>'
+    }
 
     // will show favorites and trash buttons only if logged in
     let favoriteMarkup = "";
-    let trashMarkup = "";
     if(currentUser !== null) {
       favoriteMarkup = `<i class="${isFavorite > -1 ? "fas" : "far"} fa-star"></i>`
-      trashMarkup = '<i class="fa fa-trash" aria-hidden="true"></i>'
     }
 
     // render story markup

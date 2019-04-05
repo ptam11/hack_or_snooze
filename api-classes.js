@@ -43,22 +43,24 @@ class StoryList {
     user.ownStories.unshift(new Story(response.story));
     return this.stories;
   }
-  // TODO - delete story https://hack-or-snooze-v2.herokuapp.com/stories/storyId
+  // deletes story from ownStories to handle addDeleteStoryListener()
   async deleteStory(user, storyId) {
-    const response = await $.ajax({
+    // delete story from api
+    await $.ajax({
       url: `${BASE_URL}/stories/${storyId}`, 
       type: "DELETE",
       data: {token: user.loginToken}
     });
-    console.log("response:" + response);
+    
+    // returns index of storyId in ownStories
     let ind = user.ownStories.findIndex((obj) => {
       return obj.storyId === storyId;
     })
     user.ownStories.splice(ind, 1);
-    console.log(user.ownStories);
+
+    return user.ownStories;
   }
 }
-
 
 /**
  * The User class to primarily represent the current user.
