@@ -17,6 +17,7 @@ $(async function () {
   const $storySubmit = $("#story-submit");
   const $emptyFavorite = $(".far");
   const $filledFavorite = $(".fas");
+  const $trashCan = $(".fa-trash");
 
 
 
@@ -152,6 +153,7 @@ $(async function () {
     // loop through all of our stories and generate HTML for them
     regenerateStories(storyList);
     await addRemoveFavorites();
+    await addDeleteStoryListener();
   }
 
   // run requested user.stories for first and after adding stories
@@ -162,6 +164,7 @@ $(async function () {
     }
   }
 
+  // add/remove story from favorite list when filled star .fas or empty star .far is toggled
   async function addRemoveFavorites() {
     $(".fa-star").on("click", async function () {
       $(this).toggleClass("far fas");
@@ -178,6 +181,16 @@ $(async function () {
     })
   }
 
+  // TODO - delete story when fa-trash clicked, correct user required
+  async function addDeleteStoryListener() {
+    $trashCan.on("click", async function() {
+      let storyId = $(this).parent().attr("id");
+      await deleteStory(currentUser, storyId);
+      $(`#${storyId}`).remove();
+    })
+  }
+
+
   /**
    * A function to render HTML for an individual Story instance
    */
@@ -186,7 +199,7 @@ $(async function () {
     
     // will check favorites only if user is logged in
     let isFavorite = -1;
-    console.log(currentUser);
+
     if(currentUser !== null) {
       isFavorite = currentUser.favorites.findIndex(obj => {
         return obj.storyId === story.storyId;

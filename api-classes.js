@@ -33,7 +33,6 @@ class StoryList {
      */
 
   async addStory(user, newStory) {
-    // TODO - Implement this functions!
     // this function should return the newly created story so it can be used in the script.js file where it will be appended to the DOM
     newStory.token = user.loginToken;
 
@@ -41,8 +40,23 @@ class StoryList {
       () => console.log("adding story")
     );
     this.stories.unshift(new Story(response.story));
+    user.ownStories.unshift(new Story(response.story));
     return this.stories;
   }
+  // TODO - delete story https://hack-or-snooze-v2.herokuapp.com/stories/storyId
+async deleteStory(user, storyId) {
+  console.log("triggered delete");
+  const response = await $.ajax({
+    url: `{${BASE_URL}/stories/${storyId}}`, 
+    type:"DELETE",
+    data: {token: user.loginToken}
+  });
+  let ind = user.ownStories.findIndex((obj) => {
+    return obj.storyId === storyId;
+  })
+  user.ownStories.splice(ind, 1);
+  console.log(user.ownStories);
+}
 }
 
 
