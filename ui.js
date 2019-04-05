@@ -47,6 +47,7 @@ $(async function () {
     currentUser = userInstance;
     syncCurrentUserToLocalStorage();
     loginAndSubmitForm();
+    await generateStories();
   });
 
   /**
@@ -174,8 +175,6 @@ $(async function () {
       else if ($(this).hasClass("far")) {
         await currentUser.favoriteStory(storyId, currentUser, "delete");
       }
-
-
     })
   }
 
@@ -184,21 +183,36 @@ $(async function () {
    */
   function generateStoryHTML(story) {
     let hostName = getHostName(story.url);
+    
+    // will check favorites only if user is logged in
+    let isFavorite = -1;
+    console.log(currentUser);
+    if(currentUser !== null) {
+      isFavorite = currentUser.favorites.findIndex(obj => {
+        return obj.storyId === story.storyId;
+      })
+    }
 
-    let isFavorite = currentUser.favorites.findIndex(obj => {
-      return obj.storyId === story.storyId;
-    })
+    // will show favorites and trash buttons only if logged in
+    let favoriteMarkup = "";
+    let trashMarkup = "";
+    if(currentUser !== null) {
+      favoriteMarkup = `<i class="${isFavorite > -1 ? "fas" : "far"} fa-star"></i>`
+      trashMarkup = '<i class="fa fa-trash" aria-hidden="true"></i>'
+    }
 
     // render story markup
     const storyMarkup = $(`
       <li id="${story.storyId}">
-        <i class="${isFavorite > -1 ? "fas" : "far"} fa-star"></i>
+        ${favoriteMarkup}
         <a class="article-link" href="${story.url}" target="a_blank">
           <strong>${story.title}</strong>
         </a>
         <small class="article-author">by ${story.author}</small>
-        <small class="article-hostname ${hostName}">(${hostName})</small>
+        <small class="article-hostname ${hostName} mr-5">(${hostName})</small>
+        ${trashMarkup}
         <small class="article-username">posted by ${story.username}</small>
+        
       </li>
     `);
 
