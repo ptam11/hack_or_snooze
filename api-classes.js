@@ -44,19 +44,19 @@ class StoryList {
     return this.stories;
   }
   // TODO - delete story https://hack-or-snooze-v2.herokuapp.com/stories/storyId
-async deleteStory(user, storyId) {
-  console.log("triggered delete");
-  const response = await $.ajax({
-    url: `{${BASE_URL}/stories/${storyId}}`, 
-    type:"DELETE",
-    data: {token: user.loginToken}
-  });
-  let ind = user.ownStories.findIndex((obj) => {
-    return obj.storyId === storyId;
-  })
-  user.ownStories.splice(ind, 1);
-  console.log(user.ownStories);
-}
+  async deleteStory(user, storyId) {
+    const response = await $.ajax({
+      url: `${BASE_URL}/stories/${storyId}`, 
+      type: "DELETE",
+      data: {token: user.loginToken}
+    });
+    console.log("response:" + response);
+    let ind = user.ownStories.findIndex((obj) => {
+      return obj.storyId === storyId;
+    })
+    user.ownStories.splice(ind, 1);
+    console.log(user.ownStories);
+  }
 }
 
 

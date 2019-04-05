@@ -10,14 +10,9 @@ $(async function () {
   const $navLogOut = $("#nav-logout");
   const $createStoryForm = $("#create-story-form");
   const $createStoryNav = $("#create-story-nav");
-  const $storyFormContainer = $("#story-form-container");
   const $storyTitle = $("#story-title");
   const $storyAuthor = $("#story-author");
   const $storyUrl = $("#story-url");
-  const $storySubmit = $("#story-submit");
-  const $emptyFavorite = $(".far");
-  const $filledFavorite = $(".fas");
-  const $trashCan = $(".fa-trash");
 
 
 
@@ -183,9 +178,9 @@ $(async function () {
 
   // TODO - delete story when fa-trash clicked, correct user required
   async function addDeleteStoryListener() {
-    $trashCan.on("click", async function() {
+    $(".fa-trash").on("click", async function() {
       let storyId = $(this).parent().attr("id");
-      await deleteStory(currentUser, storyId);
+      await storyList.deleteStory(currentUser, storyId);
       $(`#${storyId}`).remove();
     })
   }
