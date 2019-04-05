@@ -149,11 +149,16 @@ $(async function () {
     $allStoriesList.empty();
 
     // loop through all of our stories and generate HTML for them
+    regenerateStories(storyList);
+    await addRemoveFavorites();
+  }
+
+  // run requested user.stories for first and after adding stories
+  function regenerateStories(storyList) {
     for (let story of storyList.stories) {
       const result = generateStoryHTML(story);
       $allStoriesList.append(result);
     }
-    await addRemoveFavorites();
   }
 
   async function addRemoveFavorites() {
@@ -200,8 +205,6 @@ $(async function () {
     return storyMarkup;
   }
 
-
-
   // hide all elements in elementsArr
   function hideElements() {
     const elementsArr = [
@@ -243,7 +246,7 @@ $(async function () {
       }
     }
     await storyList.addStory(currentUser, storyObj);
-    await generateStories();
+    regenerateStories(storyList);
   })
 
   // simple function to pull the hostname from a URL

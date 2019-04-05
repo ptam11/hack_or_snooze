@@ -40,11 +40,8 @@ class StoryList {
     const response = await $.post(`${BASE_URL}/stories`, newStory,
       () => console.log("adding story")
     );
-    this.stories.push(new Story(response.story));
-    console.log(this.stories);
+    this.stories.unshift(new Story(response.story));
     return this.stories;
-
-
   }
 }
 
