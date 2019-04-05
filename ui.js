@@ -15,7 +15,6 @@ $(async function () {
   const $storyUrl = $("#story-url");
 
 
-
   // const $
 
   // global storyList variable
@@ -78,11 +77,12 @@ $(async function () {
   /**
    * Event Handler for Clicking Login
    */
-  $navLogin.on("click", function () {
+
+
+  $('body').on("click", ".fa-edit", function (e) {
     // Show the Login and Create Account Forms
-    $loginForm.slideToggle();
-    $createAccountForm.slideToggle();
-    $allStoriesList.toggle();
+    e.preventDefault();
+    $('#edit-form').slideToggle();
   });
 
   /**
@@ -149,6 +149,7 @@ $(async function () {
     regenerateStories(storyList);
     await addRemoveFavorites();
     await addDeleteStoryListener();
+
   }
 
   // run requested user.stories for first and after adding stories
@@ -158,6 +159,7 @@ $(async function () {
       $allStoriesList.append(result);
     }
   }
+
 
   // add/remove story from favorite list when filled star .fas or empty star .far is toggled
   async function addRemoveFavorites() {
@@ -204,6 +206,8 @@ $(async function () {
     }
 
         // will add trash can only if it exist in own story
+        // will edit story only if it user's own story
+        let editMarkup = "";
         let trashMarkup = "";
         if(currentUser !== null) {
           let ind = currentUser.ownStories.findIndex((obj) => {
@@ -211,16 +215,17 @@ $(async function () {
           })
           if(ind !== -1) {
             trashMarkup = '<i class="fa fa-trash ml-2" aria-hidden="true"></i>'
+            editMarkup = '<i class="far fa-edit ml-2" aria-hidden="true"></i>'
           }
       }
 
-    
     // will show favorites and trash buttons only if logged in
     let favoriteMarkup = "";
 
     if(currentUser !== null) {
       favoriteMarkup = `<i class="text-warning mr-1 ${isFavorite > -1 ? "fas" : "far"} fa-star"></i>`
     }
+
 
     // render story markup
     const storyMarkup = $(`
@@ -230,7 +235,25 @@ $(async function () {
           <a class="article-link" href="${story.url}" target="a_blank">
             <strong>${story.title}</strong>
           </a>
+          ${editMarkup}
         </div>
+        <!--------------------- EDIT STORY FORM  ----------------------->
+        <form action="" class="hidden" id="edit-form">
+          <div>
+            <label for="author">author</label>
+            <input id="edit-author" required type="text" placeholder="author name">
+          </div>
+          <div>
+            <label for="title">title</label>
+            <input id="edit-title" required type="text" placeholder="article title">
+          </div>
+          <div>
+            <label for="url">url</label>
+            <input id="edit-url" required type="url" placeholder="article url">
+          </div>
+          <button type="submit">submit</button>
+          <hr>
+        </form>
         <div class="card-body">
       
           <small class="article-author">by ${story.author}</small>
@@ -265,11 +288,9 @@ $(async function () {
   }
 
   // create story event listener 
-
   $createStoryNav.on('click', function () {
     $createStoryForm.slideToggle();
   })
-
 
   // add new story
   $createStoryForm.on('submit', async function (e) {

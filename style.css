@@ -254,6 +254,10 @@ nav {
   background-color: #BDBDBD;
 }
 
+.fa-edit {
+  color: red;
+}
+
 .card-body {
   font-family: Amatic;
   font-size: .9rem;
