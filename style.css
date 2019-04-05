@@ -227,7 +227,7 @@ form > hr {
 
 nav {
   border-radius: 15px 15px 0 0;
-  background-color: #FF3D00;
+  background-color: #4A738C;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -246,12 +246,12 @@ nav {
 }
 
 .card-header {
-  background-color:#009688;
+  background-color:#4A738C;
   font-family: Play;
 }
 
 .articles-container {
-  background-color: #BDBDBD;
+  background-color: #96C6D9;
 }
 
 .fa-edit {
@@ -262,3 +262,67 @@ nav {
   font-family: Amatic;
   font-size: .9rem;
 }
+
+#story-form-container {
+  background-color: #96C6D9;
+}
+
+
+
+
+/* Color Theme Swatches in Hex */
+.Futuristic-dark-podium-with-light-and-reflection-background-1-hex { color: #0A0B0D; }
+.Futuristic-dark-podium-with-light-and-reflection-background-2-hex { color: #213140; }
+.Futuristic-dark-podium-with-light-and-reflection-background-3-hex { color: #4A738C; }
+.Futuristic-dark-podium-with-light-and-reflection-background-4-hex { color: #73A2BF; }
+.Futuristic-dark-podium-with-light-and-reflection-background-5-hex { color: #96C6D9; }
+
+
+
+/* Color Theme Swatches in Hex */
+.MMUPs-Gray-Shades-1-hex { color: #40403F; }
+.MMUPs-Gray-Shades-2-hex { color: #80807E; }
+.MMUPs-Gray-Shades-3-hex { color: #C0C0BC; }
+.MMUPs-Gray-Shades-4-hex { color: #CDCDC8; }
+.MMUPs-Gray-Shades-5-hex { color: #A6A6A3; }
+
+/* Color Theme Swatches in RGBA */
+.MMUPs-Gray-Shades-1-rgba { color: rgba(64, 64, 63, 1); }
+.MMUPs-Gray-Shades-2-rgba { color: rgba(128, 128, 125, 1); }
+.MMUPs-Gray-Shades-3-rgba { color: rgba(191, 191, 188, 1); }
+.MMUPs-Gray-Shades-4-rgba { color: rgba(204, 204, 200, 1); }
+.MMUPs-Gray-Shades-5-rgba { color: rgba(166, 166, 163, 1); }
+
+/* Color Theme Swatches in HSLA */
+.MMUPs-Gray-Shades-1-hsla { color: hsla(60, 1, 25, 1); }
+.MMUPs-Gray-Shades-2-hsla { color: hsla(60, 1, 49, 1); }
+.MMUPs-Gray-Shades-3-hsla { color: hsla(60, 3, 74, 1); }
+.MMUPs-Gray-Shades-4-hsla { color: hsla(60, 4, 79, 1); }
+.MMUPs-Gray-Shades-5-hsla { color: hsla(60, 1, 64, 1); }
+
+
+
+
+
+/* Color Theme Swatches in Hex */
+.Deep-Space-1-hex { color: #000000; }
+.Deep-Space-2-hex { color: #030917; }
+.Deep-Space-3-hex { color: #081525; }
+.Deep-Space-4-hex { color: #0E1E2E; }
+.Deep-Space-5-hex { color: #202D3F; }
+
+/* Color Theme Swatches in RGBA */
+.Deep-Space-1-rgba { color: rgba(0, 0, 0, 1); }
+.Deep-Space-2-rgba { color: rgba(3, 9, 23, 1); }
+.Deep-Space-3-rgba { color: rgba(8, 21, 37, 1); }
+.Deep-Space-4-rgba { color: rgba(14, 30, 46, 1); }
+.Deep-Space-5-rgba { color: rgba(32, 45, 63, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Deep-Space-1-hsla { color: hsla(0, 0, 0, 1); }
+.Deep-Space-2-hsla { color: hsla(222, 76, 5, 1); }
+.Deep-Space-3-hsla { color: hsla(213, 64, 8, 1); }
+.Deep-Space-4-hsla { color: hsla(210, 53, 11, 1); }
+.Deep-Space-5-hsla { color: hsla(214, 32, 18, 1); }
+
+

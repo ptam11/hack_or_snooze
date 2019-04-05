@@ -42,7 +42,7 @@ $(async function () {
     currentUser = userInstance;
     syncCurrentUserToLocalStorage();
     loginAndSubmitForm();
-    await generateStories();
+    await generateStories(); 
   });
 
   /**
@@ -82,7 +82,7 @@ $(async function () {
   $('body').on("click", ".fa-edit", function (e) {
     // Show the Login and Create Account Forms
     e.preventDefault();
-    $('#edit-form').slideToggle();
+    $(this).parent().parent().children('.edit-form').slideToggle();
   });
 
   /**
@@ -183,7 +183,7 @@ $(async function () {
   // TODO - delete story when fa-trash clicked, correct user required
   async function addDeleteStoryListener() {
     $(".fa-trash").on("click", async function() {
-      let storyId = $(this).parent().attr("id");
+      let storyId = $(this).parent().parent().attr("id");
       await storyList.deleteStory(currentUser, storyId);
       $(`#${storyId}`).remove();
     })
@@ -238,7 +238,7 @@ $(async function () {
           ${editMarkup}
         </div>
         <!--------------------- EDIT STORY FORM  ----------------------->
-        <form action="" class="hidden" id="edit-form">
+        <form action="" class="hidden edit-form">
           <div>
             <label for="author">author</label>
             <input id="edit-author" required type="text" placeholder="author name">
